@@ -13,7 +13,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let test : GameModel
-        test = GameModel();
+		var myimages : [UIImage]
+		 print("before")
+		myimages =
+			[UIImage(named: "Images/baldhill.png")!,
+			UIImage(named: "Images/cathedral.png")!,
+			UIImage(named: "Images/lake.png")!
+		]
+		
+        test = GameModel(numTiles: 10, images: myimages);
         print("running")
         debugPrint("test");
         debugPrint(test);

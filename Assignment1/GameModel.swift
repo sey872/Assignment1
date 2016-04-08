@@ -34,31 +34,45 @@ class GameModel : CustomStringConvertible
         delegate = 0
         gameScore = 0
     }
-    
+	
+	
     init(numTiles : Int, images : [UIImage])
     {
         index = 0
         index2 = 1
         flag = false
-        tiles = [TileData(imageidentifier: 1, image : UIImage(named: "baldhill.png")!)];
+        tiles = [];
         var temp : Int
         temp = 0
-        for i in images {
-            tiles.append(TileData(imageidentifier: temp, image : i));
-            tiles.append(TileData(imageidentifier: temp, image : i));
+        for var i = 1; i <= numTiles; i++ {
+            tiles.append(TileData(imageidentifier: i, image : images[i%images.count]));
+            tiles.append(TileData(imageidentifier: i, image : images[i%images.count]));
         }
+		
+		let c = tiles.count
+		if c < 2 {}
+		else
+		{
+			for i in 0..<(c - 1) {
+				let j = Int(arc4random_uniform(UInt32(c - i))) + i
+				var temp : TileData
+				temp = tiles[i]
+				tiles[i] = tiles[j]
+				tiles[j] = temp
+			}
+		}
+		
         counter = 0
         delegate = 0
         gameScore = 0
-        reset();
     }
-    
+	
     func reset()
     {
         index = 0
         index2 = 1
         flag = false
-        tiles = [TileData(imageidentifier: 1, image : UIImage(named: "baldhill.png")!)];
+        tiles = [];
         counter = 0
         delegate = 0
         gameScore = 0
@@ -66,7 +80,19 @@ class GameModel : CustomStringConvertible
     
     var description : String
     {
-        return "my object";
+		var toReturn : String
+		toReturn = "Images: "
+		print("Num:  \(tiles.count)")
+		for var i = 0; i <= tiles.count-1; i++
+		{
+			toReturn += "\(tiles[i].imageidentifier), "
+		}
+        return toReturn
     }
+	
+	func pushTileIndex(num : Int)
+	{
+		
+	}
 }
 
