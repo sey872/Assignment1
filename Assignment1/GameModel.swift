@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol gameDidComplete{
+	func myAppViewController(controller: GameModel)
+}
+
 class GameModel : CustomStringConvertible
 {
     struct TileData
@@ -21,7 +25,6 @@ class GameModel : CustomStringConvertible
     var tiles : [TileData]
     var flag : Bool
     var counter : Int
-    var delegate : addr64_t
     var gameScore : Int
     
     init()
@@ -31,9 +34,10 @@ class GameModel : CustomStringConvertible
         flag = false
         tiles = [TileData(imageidentifier: 1, image : UIImage(named: "Images/baldhill.png")!)];
         counter = 0
-        delegate = 0
         gameScore = 0
     }
+	
+	//delegate?.gameDidComplete(self)
 	
 	
     init(numTiles : Int, images : [UIImage])
@@ -63,7 +67,6 @@ class GameModel : CustomStringConvertible
 		}
 		
         counter = 0
-        delegate = 0
         gameScore = 0
     }
 	
@@ -74,7 +77,6 @@ class GameModel : CustomStringConvertible
         flag = false
         tiles = [];
         counter = 0
-        delegate = 0
         gameScore = 0
     }
     
@@ -92,7 +94,15 @@ class GameModel : CustomStringConvertible
 	
 	func pushTileIndex(num : Int)
 	{
-		
+		index2 = index
+		index = num
 	}
+	
+	
+/*
+1) gameDidComplete(gameModel)
+2) didMatchTile(gameModel, tileIndex, previousTileIndex)
+3) didFailToMatchTile(gameModel, tileIndex, previousTileIndex) 4) scoreDidUpdate(gameModel, newScore)
+*/
 }
 
