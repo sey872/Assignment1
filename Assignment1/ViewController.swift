@@ -12,6 +12,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let test : GameModel
+        test = GameModel();
+        print("running")
+        debugPrint("test");
+        debugPrint(test);
         // Do any additional setup after loading the view, typically from a nib.
     }
 
